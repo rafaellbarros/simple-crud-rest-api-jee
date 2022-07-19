@@ -2,9 +2,6 @@ package br.com.rafaellbarros.simplecrudrestapijee.service;
 
 import br.com.rafaellbarros.simplecrudrestapijee.model.entity.Todo;
 import br.com.rafaellbarros.simplecrudrestapijee.repository.TodoRepository;
-import lombok.extern.log4j.Log4j;
-import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
 import org.springframework.data.repository.core.support.RepositoryFactorySupport;
@@ -16,7 +13,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.ws.rs.NotFoundException;
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
