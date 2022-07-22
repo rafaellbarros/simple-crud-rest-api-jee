@@ -3,14 +3,9 @@ package br.com.rafaellbarros.simplecrudrestapijee.service;
 import br.com.rafaellbarros.simplecrudrestapijee.model.entity.Todo;
 import br.com.rafaellbarros.simplecrudrestapijee.repository.TodoRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
-import org.springframework.data.repository.core.support.RepositoryFactorySupport;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Produces;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.NotFoundException;
 import java.util.List;
@@ -24,22 +19,13 @@ import java.util.logging.Logger;
  * @author rafael barros for DevDusCorre <rafaelbarros.softwareengineer@gmail.com> on 19/07/2022
  */
 
-
+@ApplicationScoped
 public class TodoService {
 
     private static final Logger logger = Logger.getLogger(TodoService.class.getName());
 
-    @Produces
-    @Dependent
-    @PersistenceContext(unitName = "mysql_dev_PU")
-    private EntityManager em;
+    @Inject
     private TodoRepository repository;
-
-    @PostConstruct
-    private void init() {
-        RepositoryFactorySupport factory = new JpaRepositoryFactory(em);
-        this.repository = factory.getRepository(TodoRepository.class);
-    }
 
     public Todo findById(final Long id) {
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Todo não encontrado: "+ id));
